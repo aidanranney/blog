@@ -1,21 +1,63 @@
 import React from "react"
-import { Link } from "gatsby"
-
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+import { Link, graphql } from "gatsby"
+import { rhythm } from "../utils/typography"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+class IndexPage extends React.Component {
+
+  render() {
+    const { data } = this.props
+    const posts = data.allMarkdownRemark.edges
+
+    return (
+      <Layout>
+        <SEO title="Home" />
+        <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
+          {posts.map(({ node }) => {
+            const title = node.frontmatter.title || node.fields.slug
+            return (
+              <div key={node.fields.slug}>
+                <h3 style={{marginBottom: rhythm(1/4)}}>
+                  <Link to={node.fields.slug}>
+                    {title}
+                  </Link>
+                </h3>
+                <small>{node.frontmatter.date}</small>
+                <p dangerouslySetInnerHTML={{__html: node.frontmatter.description || node.excerpt}} />
+              </div>
+            )
+          })}
+        </div>
+      </Layout>
+    )
+  }
+}
 
 export default IndexPage
+
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+        author
+      }
+    }
+    allMarkdownRemark {
+      edges {
+        node {
+          frontmatter {
+            title
+            date(formatString: "LL")
+          }
+          fields {
+            slug
+          }
+          html
+          excerpt
+        }
+      }
+    }
+  }
+`
