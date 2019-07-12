@@ -2,8 +2,6 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Link, graphql } from "gatsby"
-import { rhythm, scale } from "../utils/typography"
-import "../styles/index.css"
 
 class IndexPage extends React.Component {
   render() {
@@ -13,22 +11,13 @@ class IndexPage extends React.Component {
     return (
       <Layout>
         <SEO title="Home" />
-        <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
+        <div>
           {posts.map(({ node }) => {
             const title = node.frontmatter.title || node.fields.slug
             return (
-              <div key={node.fields.slug}>
-                <h3
-                  style={{
-                    marginBottom: rhythm(1/4),
-                  }}
-                  className='postlink'
-                >
+              <div key={node.fields.slug} className="post">
+                <h3>
                   <Link
-                    style={{
-                      textDecoration: "none",
-                      color: "inherit",
-                    }}
                     to={node.fields.slug}
                   >
                     {title}
