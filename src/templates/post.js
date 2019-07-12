@@ -12,16 +12,16 @@ const Post = ({ data }) => {
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
-      ></SEO>
-      <h3 style={{ marginTop: rhythm(1), marginBottom: 0 }}>
-        {post.frontmatter.title}
-      </h3>
-      <small>{post.frontmatter.date}</small>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: post.html,
-        }}
       />
+      <div className="post">
+        <h3>{post.frontmatter.title}</h3>
+        <small>{post.frontmatter.date}</small>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: post.html,
+          }}
+        />
+      </div>
     </Layout>
   )
 }
