@@ -2,7 +2,6 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
-import { rhythm, scale } from "../utils/typography"
 
 const Post = ({ data }) => {
   const post = data.markdownRemark

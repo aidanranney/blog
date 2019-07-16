@@ -16,7 +16,7 @@ class IndexPage extends React.Component {
             const title = node.frontmatter.title || node.fields.slug
             return (
               <div key={node.fields.slug} className="post">
-                <h3>
+                <h3 id="link">
                   <Link
                     to={node.fields.slug}
                   >
@@ -41,27 +41,30 @@ class IndexPage extends React.Component {
 export default IndexPage
 
 export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-        author
-      }
-    }
-    allMarkdownRemark {
-      edges {
-        node {
-          frontmatter {
-            title
-            date(formatString: "LL")
-          }
-          fields {
-            slug
-          }
-          html
-          excerpt
+query {
+  allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}) {
+    edges {
+      node {
+        html
+        frontmatter {
+          date(formatString: "LL")
+          title
         }
+        fields {
+          slug
+        }
+        excerpt
       }
     }
   }
+  site {
+    siteMetadata {
+      author
+      title
+    }
+  }
+}
+
+
+
 `

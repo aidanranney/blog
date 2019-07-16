@@ -1,9 +1,3 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
@@ -26,23 +20,21 @@ exports.createPages = ({ graphql, actions }) => {
     const blogPost = path.resolve(`./src/templates/post.js`)
     return graphql(
         `
-        {
-            allMarkdownRemark(
-                sort: { fields: [frontmatter___date], order: DESC }
-                limit: 1000
-            ) {
-                edges {
-                    node {
-                        fields {
-                            slug
-                        }
-                        frontmatter {
-                            title
-                        }
-                    }
+        query {
+            allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}, limit: 1000) {
+              edges {
+                node {
+                  frontmatter {
+                    title
+                  }
+                  fields {
+                    slug
+                  }
                 }
-            }          
-        }
+              }
+            }
+          }
+          
         `
     ).then(result => {
         if (result.errors) {
