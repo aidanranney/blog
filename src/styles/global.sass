@@ -1,30 +1,45 @@
-body
+html
     display: flex
     justify-content: center
+    
+body
     margin: 0 auto
-    padding: 0px 1.0875rem 1.45rem
     padding-bottom: 0
+    height: 100%
+
+    .layoutWrapper
+        position: relative
 
     main
         min-width: 90%
         max-width: 90%
         padding: 2rem
     
+    pre
+        display: block
+        font-size: 10pt
+        margin: 1rem
+        background-color: #f6f8fa
+    
     footer
-        margin-top: 3rem
+        position: absolute
+        bottom: 0
+        margin-bottom: 0px
+        margin-left: 0px
+        font-size: 10pt
 
 .post
     
     h3
         margin-bottom: 0
-
-        &:hover
-            transform: scale(1.03)
-            transition: 0.2s
-
+            
         a
             text-decoration: none
             color: inherit
+
+    #link:hover
+        transform: scale(1.03)
+        transition: 0.2s
 
     p
         margin-top: 1rem

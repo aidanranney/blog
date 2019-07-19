@@ -6,7 +6,6 @@
  */
 
 import React from "react"
-import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
@@ -24,7 +23,7 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <div
+    <div className="layoutWrapper"
       style={{
         maxWidth: rhythm(30),
         padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
@@ -37,10 +36,6 @@ const Layout = ({ children }) => {
       <footer>© Aidan Ranney {new Date().getFullYear()}</footer>
     </div>
   )
-}
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 }
 
 export default Layout
