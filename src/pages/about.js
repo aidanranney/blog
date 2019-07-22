@@ -21,7 +21,8 @@ class AboutPage extends React.Component {
           </p>
           <div
             style={{
-              maxWidth: "400px",
+              maxWidth: "500px",
+              margin: "0 auto",
             }}
           >
             <Img fluid={data.aidanjulia.childImageSharp.fluid} />

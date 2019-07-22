@@ -11,7 +11,7 @@ module.exports = {
       twitter: `pianomap`,
       facebook: `piano.map`,
       instagram: `aidangrammy`
-    }
+    },
   },
   plugins: [
     {
