@@ -6,6 +6,7 @@ import SEO from "../components/seo"
 
 class AboutPage extends React.Component {
   render() {
+    const { social } = this.props.data.site.siteMetadata
     const { data } = this.props
 
     return (
@@ -23,13 +24,18 @@ class AboutPage extends React.Component {
               maxWidth: "400px",
             }}
           >
-            <Img fluid={data.file.childImageSharp.fluid} />
-            <br />
-            <div>
-              <span>instagram</span>
-              <span>twitter</span>
-              <span>facebook</span>
-            </div>
+            <Img fluid={data.aidanjulia.childImageSharp.fluid} />
+          </div>
+          <div className="socialLinks">
+            <a href={`http://instagram.com/${social.instagram}`}>
+              <Img fluid={data.instagram.childImageSharp.fluid} />
+            </a>
+            <a href={`http://twitter.com/${social.twitter}`}>
+              <Img fluid={data.twitter.childImageSharp.fluid} />
+            </a>
+            <a href={`http://facebook.com/${social.fbook}`}>
+              <Img fluid={data.facebook.childImageSharp.fluid} />
+            </a>
           </div>
         </div>
       </Layout>
@@ -39,14 +45,38 @@ class AboutPage extends React.Component {
 
 export default AboutPage
 
+export const fluidImage = graphql`
+  fragment fluidImage on File {
+    childImageSharp {
+      fluid(maxWidth: 600) {
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+`
+
 export const pageQuery = graphql`
   query {
-    file(relativePath: { eq: "aidanjulia.png" }) {
-      childImageSharp {
-        fluid(maxWidth: 300) {
-          ...GatsbyImageSharpFluid
+    site {
+      siteMetadata {
+        social {
+          facebook
+          instagram
+          twitter
         }
       }
+    }
+    aidanjulia: file(relativePath: { eq: "aidanjulia.png" }) {
+      ...fluidImage
+    }
+    twitter: file(relativePath: { eq: "twitter.png" }) {
+      ...fluidImage
+    }
+    facebook: file(relativePath: { eq: "fbook.png" }) {
+      ...fluidImage
+    }
+    instagram: file(relativePath: { eq: "instagram.png" }) {
+      ...fluidImage
     }
   }
 `
