@@ -23,12 +23,7 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <div className="layoutWrapper"
-      style={{
-        maxWidth: rhythm(30),
-        padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-      }}
-    >
+    <div className="layoutWrapper">
       <Header siteTitle={data.site.siteMetadata.title} />
       <div>
         <main>{children}</main>
